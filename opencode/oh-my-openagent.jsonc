@@ -1,0 +1,25 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agents": {
+    // Primary agent — factory chain had only gpt-5.5, no fallback at all.
+    // glm-5.2 gives it a pay-per-token safety net.
+    "hephaestus": {
+      "fallback_models": ["glm-5.2"]
+    },
+
+    // Reasoning subagents — glm-5.2 is tried before the factory chain,
+    // making it the preferred model (factory chain remains as backstop).
+    "oracle": {
+      "fallback_models": ["glm-5.2"]
+    },
+    "metis": {
+      "fallback_models": ["glm-5.2"]
+    },
+    "momus": {
+      "fallback_models": ["glm-5.2"]
+    },
+    "sisyphus-junior": {
+      "fallback_models": ["glm-5.2"]
+    }
+  }
+}

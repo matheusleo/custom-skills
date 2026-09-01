@@ -1,0 +1,110 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // User
+  "username": "Matheus",
+
+  // Plugins — closest opencode-native equivalents to Claude's superpowers
+  // workflow. Auto-installed by Bun at startup; cached in ~/.cache/opencode/.
+  "plugin": [
+    "@zenobius/opencode-skillful",
+    "opencode-conductor",
+    "micode",
+    "@plannotator/opencode",
+    "oh-my-openagent"
+  ],
+
+  // Shared behavioural instructions — the same files Claude Code loads via
+  // @imports in ~/.claude/CLAUDE.md. Edit them once; both tools pick them up.
+  "instructions": [
+    "~/.config/opencode/instructions.md",
+    "~/.claude/RTK.md",
+    "~/.claude/COMMUNICATION.md",
+    "~/.claude/SELF_IMPROVEMENT.md",
+    "~/.claude/POWER_UPGRADES.md",
+    "~/.claude/VAMMO_ENG.md"
+  ],
+
+  // Bash permissions mirror Claude Code's permissions.allow list: ask by
+  // default, auto-allow the read-only dev commands. Both raw and rtk-prefixed
+  // forms are allowed so this holds whether the rtk-hook plugin rewrites the
+  // command before or after the permission check. Broad rule first (last match
+  // wins), narrow rules last.
+  "permission": {
+    "bash": {
+      "*": "ask",
+
+      "ls*": "allow",
+      "rtk ls*": "allow",
+      "grep*": "allow",
+      "rtk grep*": "allow",
+      "rg*": "allow",
+      "rtk rg*": "allow",
+      "rtk read*": "allow",
+      "rtk cat*": "allow",
+      "rtk find*": "allow",
+
+      "git status*": "allow",
+      "rtk git status*": "allow",
+      "git diff*": "allow",
+      "rtk git diff*": "allow",
+      "git log*": "allow",
+      "rtk git log*": "allow",
+      "git show*": "allow",
+      "rtk git show*": "allow",
+      "git branch*": "allow",
+      "rtk git branch*": "allow",
+      "git remote*": "allow",
+      "rtk git remote*": "allow",
+      "git stash list*": "allow",
+      "rtk git stash list*": "allow",
+      "git add*": "allow",
+      "rtk git add*": "allow",
+      "git commit*": "allow",
+      "rtk git commit*": "allow",
+      "git checkout*": "allow",
+      "rtk git checkout*": "allow",
+      "git switch*": "allow",
+      "rtk git switch*": "allow",
+      "git mv*": "allow",
+      "rtk git mv*": "allow",
+      "git rm*": "allow",
+      "rtk git rm*": "allow",
+
+      "pnpm test*": "allow",
+      "rtk pnpm test*": "allow",
+      "pnpm lint*": "allow",
+      "rtk pnpm lint*": "allow",
+      "pnpm type-check*": "allow",
+      "rtk pnpm type-check*": "allow",
+      "pnpm format:check*": "allow",
+      "rtk pnpm format:check*": "allow",
+      "pnpm validate-translations*": "allow",
+      "rtk pnpm validate-translations*": "allow",
+      "pnpm find-missing-translations*": "allow",
+      "rtk pnpm find-missing-translations*": "allow",
+      "pnpm find-unused-translations*": "allow",
+      "rtk pnpm find-unused-translations*": "allow",
+
+      "gh pr view*": "allow",
+      "rtk gh pr view*": "allow",
+      "gh pr list*": "allow",
+      "rtk gh pr list*": "allow",
+      "gh pr checks*": "allow",
+      "rtk gh pr checks*": "allow",
+      "gh pr diff*": "allow",
+      "rtk gh pr diff*": "allow",
+      "gh issue view*": "allow",
+      "rtk gh issue view*": "allow",
+      "gh issue list*": "allow",
+      "rtk gh issue list*": "allow",
+      "gh run view*": "allow",
+      "rtk gh run view*": "allow",
+      "gh run list*": "allow",
+      "rtk gh run list*": "allow",
+
+      "gain*": "allow",
+      "rtk gain*": "allow"
+    }
+  }
+}

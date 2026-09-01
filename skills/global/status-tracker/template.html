@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{PROJECT}} — {{FEATURE}} · Implementation Status</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #161a22;
+    --panel-2: #1c2230;
+    --border: #2a3142;
+    --text: #e7ebf3;
+    --muted: #95a0b5;
+    --accent: #6ea8ff;
+    --green: #2ecc71;
+    --yellow: #f1c40f;
+    --red: #e74c3c;
+    --gray: #7b8497;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.55; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+  h1 { font-size: 32px; margin: 0 0 8px; letter-spacing: -0.5px; }
+  h2 { font-size: 22px; margin: 40px 0 14px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  h3 { font-size: 17px; margin: 22px 0 10px; color: var(--accent); }
+  p { margin: 8px 0; }
+  .sub { color: var(--muted); margin-bottom: 24px; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin: 18px 0 8px; font-size: 14px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .dot.done { background: var(--green); }
+  .dot.partial { background: var(--yellow); }
+  .dot.todo { background: var(--red); }
+  .dot.na { background: var(--gray); }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 18px; background: var(--panel); border-radius: 8px; overflow: hidden; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; font-size: 14px; }
+  th { background: var(--panel-2); font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-size: 12px; }
+  tr:last-child td { border-bottom: none; }
+  code { background: #0b0d12; padding: 1px 6px; border-radius: 4px; font-size: 12.5px; color: #d2e0ff; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .id { font-weight: 600; color: var(--accent); white-space: nowrap; }
+  .status { font-weight: 600; white-space: nowrap; }
+  .status.done { color: var(--green); }
+  .status.partial { color: var(--yellow); }
+  .status.todo { color: var(--red); }
+  .status.na { color: var(--gray); }
+  .ref { color: var(--muted); font-size: 12.5px; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.3px; text-transform: uppercase; }
+  .pill.done { background: rgba(46,204,113,0.15); color: var(--green); }
+  .pill.partial { background: rgba(241,196,15,0.15); color: var(--yellow); }
+  .pill.todo { background: rgba(231,76,60,0.15); color: var(--red); }
+  .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 18px 0 24px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .card .n { font-size: 28px; font-weight: 700; }
+  .card .l { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.4px; }
+  ol.priority { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 14px 14px 14px 38px; margin: 14px 0; }
+  ol.priority li { margin: 6px 0; }
+  .progress-wrap { margin: 0 0 28px; }
+  .progress-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px; }
+  .progress-head .pct { color: var(--green); font-weight: 700; font-size: 14px; letter-spacing: 0; }
+  .progress-track { width: 100%; height: 10px; background: var(--panel); border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--green), #5ee49b); border-radius: 999px; transition: width 0.4s ease; }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>{{PROJECT}} — {{FEATURE}}</h1>
+  <p class="sub">{{SUBTITLE}} · branch <code>{{BRANCH}}</code> · generated {{DATE}}</p>
+
+  <!-- Drop this block when there is no spec document to cite. -->
+  <p>
+    Spec: <a href="{{SPEC_URL}}" target="_blank">{{SPEC_LABEL}}</a><br/>
+    Owner: {{OWNER}} · Status: {{SPEC_STATUS}} · Priority: {{PRIORITY}}
+  </p>
+
+  <div class="legend">
+    <span><i class="dot done"></i> Done</span>
+    <span><i class="dot partial"></i> Partial / stubbed</span>
+    <span><i class="dot todo"></i> Not started</span>
+  </div>
+
+  <div class="summary">
+    <div class="card"><div class="n" style="color:var(--green)">{{N_DONE}}</div><div class="l">Done</div></div>
+    <div class="card"><div class="n" style="color:var(--yellow)">{{N_PARTIAL}}</div><div class="l">Partial</div></div>
+    <div class="card"><div class="n" style="color:var(--red)">{{N_TODO}}</div><div class="l">Pending</div></div>
+  </div>
+
+  <div class="progress-wrap" role="progressbar" aria-valuenow="{{PCT}}" aria-valuemin="0" aria-valuemax="100" aria-label="Implementation progress">
+    <div class="progress-head">
+      <span>Overall progress · {{N_DONE}} / {{N_TOTAL}} done</span>
+      <span class="pct">{{PCT}}%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" style="width: {{PCT}}%;"></div>
+    </div>
+  </div>
+
+  <!-- Optional. Include only while real ambiguities are open; delete once all are resolved. -->
+  <h2>Open questions / assumptions</h2>
+  <table>
+    <thead><tr><th>#</th><th>What's ambiguous</th><th>Assumption made to keep moving</th><th>Blocks / risks</th><th>Who</th></tr></thead>
+    <tbody>
+      <tr><td class="id">Q1</td><td>{{AMBIGUITY}}</td><td>{{ASSUMPTION}}</td><td>{{RISK}}</td><td>{{OWNER}}</td></tr>
+    </tbody>
+  </table>
+
+  <!-- One h2 + table per phase. Phase A is always foundation; last phase is always Verification & Polish. -->
+  <h2>A. {{PHASE_A_TITLE}}</h2>
+  <table>
+    <thead><tr><th>ID</th><th>Task</th><th>Spec §</th><th>Status</th><th>Evidence / Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="id">A1</td><td>{{TASK}}</td><td class="ref">{{SPEC_REF}}</td><td class="status todo">❌ Not started</td><td>—</td></tr>
+      <tr><td class="id">A2</td><td>{{TASK}}</td><td class="ref">{{SPEC_REF}}</td><td class="status partial">⚠️ Partial</td><td>{{WHAT_IS_MISSING_AND_WHY}}</td></tr>
+      <tr><td class="id">A3</td><td>{{TASK}}</td><td class="ref">{{SPEC_REF}}</td><td class="status done">✅ Done</td><td><code>path/to/file.ts:120-164</code> — {{DEVIATION_OR_DECISION}}</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Out of scope</h2>
+  <p class="meta">{{EXCLUSIONS_SEPARATED_BY_MIDDOTS}}</p>
+
+  <h2>Suggested Build Sequence</h2>
+  <ol class="priority">
+    <li><b>{{STEP}}</b> — {{WHY_IT_COMES_FIRST}} <span class="meta">({{TASK_IDS}})</span></li>
+  </ol>
+
+</div>
+</body>
+</html>
