@@ -57,3 +57,4 @@
 
 - Use the repository's documented tools and established skills when they apply. Do not install third-party tooling, MCP servers, or CLIs that may send Vammo project context externally without validating the trust chain and obtaining user confirmation.
 - RTK is available for its direct meta-commands (`rtk gain`, `rtk gain --history`, `rtk discover`, and `rtk proxy <cmd>`). Do not assume Claude's automatic RTK command-rewrite hook applies to Codex.
+- Run Git operations through `rtk git ...`, including commits.
