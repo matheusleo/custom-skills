@@ -1,6 +1,6 @@
 # Custom Skills & Config
 
-Personal configuration repository for opencode and Claude Code tools, including skills, plugins, and behavioral instructions.
+Personal configuration repository for Codex, opencode, and Claude Code tools, including skills, plugins, and behavioral instructions.
 
 ## Structure
 
@@ -21,13 +21,21 @@ Personal configuration repository for opencode and Claude Code tools, including 
 │   ├── SELF_IMPROVEMENT.md     # Self-improvement rules
 │   ├── POWER_UPGRADES.md       # Recommended tools & plugins
 │   └── VAMMO_ENG.md            # Vammo engineering conventions
+├── codex/              # Codex configuration
+│   ├── AGENTS.md               # Global working agreement
+│   ├── config.toml             # Portable model and TUI defaults
+│   └── hooks.json              # Orca and peon-ping lifecycle hooks
 ├── skills/
 │   ├── global/         # Skills available across all projects
+│   │   ├── find-skills
+│   │   ├── humanizer
 │   │   ├── meeting-transcriber
 │   │   ├── peon-ping-config
 │   │   ├── peon-ping-log
 │   │   ├── peon-ping-toggle
 │   │   ├── peon-ping-use
+│   │   ├── my-custom-review
+│   │   ├── orchestration
 │   │   └── status-tracker
 │   └── project/        # Project-specific skills (copy as needed)
 │       ├── e2e-testing-patterns
@@ -36,7 +44,8 @@ Personal configuration repository for opencode and Claude Code tools, including 
 │       └── vammo-ui
 └── scripts/
     ├── setup-opencode.sh       # Setup script for opencode
-    └── setup-claude.sh         # Setup script for Claude Code
+    ├── setup-claude.sh         # Setup script for Claude Code
+    └── setup-codex.sh          # Setup script for Codex
 ```
 
 ## Setup
@@ -46,6 +55,7 @@ Personal configuration repository for opencode and Claude Code tools, including 
 - [GitHub CLI](https://cli.github.com/) (`gh`) installed and authenticated
 - [opencode](https://opencode.ai/) installed (for opencode setup)
 - [Claude Code](https://docs.claude.com/en/docs/claude-code) installed (for Claude setup)
+- [Codex](https://developers.openai.com/codex/cli/) installed (for Codex setup)
 
 ### Quick Start
 
@@ -67,6 +77,11 @@ cd custom-skills
 ./scripts/setup-claude.sh
 ```
 
+**For Codex:**
+```bash
+./scripts/setup-codex.sh
+```
+
 ### What the scripts do
 
 Both scripts will:
@@ -76,6 +91,11 @@ Both scripts will:
 - Leave project-specific skills in the repo for manual copying
 
 **Note:** The scripts will skip files that already exist to avoid overwriting your local changes.
+
+The Codex setup installs global instructions in `~/.codex/AGENTS.md`, portable
+model and TUI defaults in `~/.codex/config.toml`, lifecycle hooks in
+`~/.codex/hooks.json`, and global skills in `~/.agents/skills`. Project trust
+entries, auth, history, and hook trust hashes remain local to each machine.
 
 ## Maintenance
 
@@ -94,6 +114,7 @@ git push
 git pull
 ./scripts/setup-opencode.sh
 ./scripts/setup-claude.sh
+./scripts/setup-codex.sh
 ```
 
 ## Adding New Skills
