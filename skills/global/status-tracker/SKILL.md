@@ -30,7 +30,7 @@ Slots, in this order. Every one is REQUIRED unless marked:
 3. Legend: done / partial / not started.
 4. Three count cards: done, partial, pending.
 5. Progress bar: `N / TOTAL done`, integer percent, `aria-valuenow` matching.
-6. Open questions table — `# │ What's ambiguous │ Assumption made to keep moving │ Blocks / risks │ Who`. *(include while ambiguities are open; delete the section once none are)*
+6. Open questions table — `# │ Status │ What's ambiguous │ Assumption / decision │ Blocks / risks │ Who`. Status comes second so the answered rows are scannable down the left edge. *(include while any question is open; delete the section once none are)*
 7. One `h2` + table per phase. Header is exactly `ID │ Task │ <SPEC> § │ Status │ Evidence / Notes`, where `<SPEC>` is `PRD` when a PRD drives the work and `Spec` otherwise. Match whatever the repo's existing trackers already use.
 8. `Out of scope` — one `.meta` paragraph, items separated by `·`.
 9. `Suggested Build Sequence` — ordered list, each item naming the task IDs it covers.
@@ -63,6 +63,21 @@ Exactly four. `✅ Done` · `⚠️ Partial` · `❌ Not started` · `➖ N/A`, 
 **Partial is not a nicer word for done.** It means the shape exists but something real is
 missing — a stub, a fixture, a hardcoded response, a permission not yet gated. A Partial row
 must say in Evidence what is missing.
+
+### Question status
+
+The open-questions table has its own three, reusing the same CSS classes:
+`✅ Answered` · `⏳ Validating` · `❓ Open`, with `class="status done|partial|todo"`.
+
+`⏳ Validating` is for a question you have decided and are building on, while someone else
+still has to confirm it — a decision that unblocks the work but could come back. Say in
+`Blocks / risks` what changes if the answer differs, and how expensive that change is.
+
+**An answered question keeps its row.** Set its status, write the decision and who made it
+into `Assumption / decision`, and leave the original ambiguity text untouched — it is the
+provenance for why the code looks the way it does. Deleting the row throws away the only
+record that the alternative was considered. A row whose answer merely confirmed the standing
+assumption still gets marked `✅ Answered`; "the assumption was right" is itself the decision.
 
 ## Evidence / Notes — the load-bearing column
 

@@ -98,12 +98,16 @@
     </div>
   </div>
 
-  <!-- Optional. Include only while real ambiguities are open; delete once all are resolved. -->
+  <!-- Optional. Include only while real questions are open; delete once all are answered.
+       An answered question KEEPS its row: flip the status, record the decision, leave the
+       ambiguity text as provenance. -->
   <h2>Open questions / assumptions</h2>
   <table>
-    <thead><tr><th>#</th><th>What's ambiguous</th><th>Assumption made to keep moving</th><th>Blocks / risks</th><th>Who</th></tr></thead>
+    <thead><tr><th>#</th><th>Status</th><th>What's ambiguous</th><th>Assumption / decision</th><th>Blocks / risks</th><th>Who</th></tr></thead>
     <tbody>
-      <tr><td class="id">Q1</td><td>{{AMBIGUITY}}</td><td>{{ASSUMPTION}}</td><td>{{RISK}}</td><td>{{OWNER}}</td></tr>
+      <tr><td class="id">Q1</td><td class="status todo">❓ Open</td><td>{{AMBIGUITY}}</td><td>{{ASSUMPTION}}</td><td>{{RISK}}</td><td>{{OWNER}}</td></tr>
+      <tr><td class="id">Q2</td><td class="status partial">⏳ Validating</td><td>{{AMBIGUITY}}</td><td>{{DECISION_BUILT_ON}} — decided by {{WHO}}</td><td>{{WHAT_CHANGES_IF_THE_ANSWER_DIFFERS_AND_HOW_COSTLY}}</td><td>{{WHO_CONFIRMS}}</td></tr>
+      <tr><td class="id">Q3</td><td class="status done">✅ Answered</td><td>{{AMBIGUITY}}</td><td><b>Answered {{DATE}}</b> ({{WHO}}): {{DECISION}}</td><td>{{CONSEQUENCE_ACCEPTED_OR_RISK_CLOSED}}</td><td>{{WHO}}</td></tr>
     </tbody>
   </table>
 
